@@ -9,12 +9,14 @@ import java.util.Scanner;
 
 /**
  *
- * @author andresgbe
+ * @author Andres Gil and Diego Leon
  */
 public final class Medicamento {
     Scanner datos = new Scanner(System.in);
     
-    // ATRIBUTOS DE LOS MEDICAMENTOS
+    // ATRIBUTOS DE LOS MEDICAMENTOS   
+    //////////////////////////////////
+    
     private int codigo;
     private String name;
     private int costo;
@@ -25,9 +27,15 @@ public final class Medicamento {
     private int lote;
     private int vigencia;
     private int fecha_actual = 0;
-    /////////////////////////
+    //////////////////////////////////
+    
+    
+    
+    
+    
     
     // VALORES DEFAULT DE LOS ATRIBUTOS
+    //////////////////////////////////
     public Medicamento(){
         codigo = 1;
         name = "";
@@ -39,7 +47,7 @@ public final class Medicamento {
         lote = 1;
         vigencia = 1;
     }
-    //////////////////
+    ////////////////////////
     
     public Medicamento(int codigo, String name, int costo, int ventas, int stock, String caducidad, int lote, int vigencia){
         
@@ -130,12 +138,10 @@ public final class Medicamento {
     public void setFecha_actual(int fecha_actual){
         this.fecha_actual = fecha_actual;
     }
-    //////////////////////
+   ////////////////////////////////////////////////
    
     
-        public int count_digits(int x) {
-            return (int) Math.floor(Math.log10(x)+1);
-        }
+
     
     
     ///METODOS
@@ -219,6 +225,33 @@ public final class Medicamento {
         pago = costo +(costo * porcentaje);
         return pago;
     }
+    
+    
+     ///// VERIFICAR SI LA FECHA DE VENCIMIENTO ES MENOR O MAYOR QUE LA FECHA ACTUAL
+        public boolean dateChecker(){
+            int mes = 0, ano = 0, mes_fecha = 0, ano_fecha = 0, num;
+            int boton = 0, boton1 = 0;
+            
+            num = Integer.parseInt(caducidad);
+            
+            mes = fecha_actual / 10000;
+            ano = fecha_actual % 10000;
+            
+            mes_fecha = num / 10000;
+            ano_fecha = num % 10000;
+            
+            if(mes >= mes_fecha){
+                boton = 1;
+            } else if(ano >= ano_fecha){
+                boton1 = 1;
+            }
+            
+           if (boton == 1 && boton1 == 1){
+               return true;
+           } else {
+               return false;
+           }
+        }
     
     
         /// DETERMINAR SI ESTA VENCIDO
@@ -335,22 +368,27 @@ public final class Medicamento {
     
     ////////////////////////////////////
     
-    ///////////VALIDADORES
-         public boolean validar(String cadena_x){
-         //this.cadena = cadena_x;
-             int num;
-         try
-         {
+    ///////////VALIDADORES///////////////////
+    /////////////////////////////////////////
+    
+    
+    /////////// COMPROBAR QUE SON ENTEROS
+    public boolean validar(String cadena_x){
+    //this.cadena = cadena_x;
+        int num;
+        try {
              num = Integer.parseInt(cadena_x);
              return true;
-         } catch(Exception e){
-             return false;
-         }
-     }
+            } catch(Exception e){
+                return false;
+            }
+    }
     
-  
+  //////////// CONTAR DIGITOS
+    public int count_digits(int x) {
+        return (int) Math.floor(Math.log10(x)+1);
+    }
  }
-
 
      
 
